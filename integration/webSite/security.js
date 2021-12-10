@@ -15,7 +15,7 @@ describe('security', () => {
       cy.url().should('contains', 'https://wordpress.com/me/security');
 
       cy.contains('Security').should('have.text', 'Security')
-      cy.contains('New password').click().type('Boomer01!')
+      
       //Yes, the space is needed if checking the entire string
       cy.contains('You\'ve recently used this password. Try something new.').should('have.text',' You\'ve recently used this password. Try something new.')
 
