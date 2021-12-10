@@ -2,12 +2,17 @@ describe('login', () => {
     it('login', () => {
       //Log into site
   
+      //Password not in archive. Get from env file on start up
       const password = Cypress.env('password')
-
       cy.visit('https://wordpress.com/me')
       cy.get('[name=password]')
+
+      //Getting login from file 
+      cy.fixture('login').then((profile)=>{
       cy.contains('Email Address or Username').click()
-        .type('rhefele@gmail.com')
+      .type(profile.user)
+    })
+
       cy.contains('Continue').click()
       cy.contains('Password').click()
         .type(password)  
@@ -16,7 +21,7 @@ describe('login', () => {
       //validate login by url
       cy.url().should('include', '/wordpress.com/me')
       
-      //Add data to field
+      ////Add data to field
       //No need to clean up. Data is cleared before entering
       cy.get('input#first_name').click().focused().clear().type('Robert');
       cy.get('input#last_name').click().focused().clear().type('Hefele');
