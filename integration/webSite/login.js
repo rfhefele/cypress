@@ -1,12 +1,18 @@
 describe('login', () => {
     it('login', () => {
       //Log into site
+      
+      const username = Cypress.env('username')
+      const password = Cypress.env('password')
+    
       cy.visit('https://wordpress.com/me')
+      cy.get('[name=password]')
+
       cy.contains('Email Address or Username').click()
         .type('rhefele@gmail.com')
       cy.contains('Continue').click()
       cy.contains('Password').click()
-        .type('Boomer01!')  
+        .type(password)  
       cy.contains('Log In').click()
 
       //validate login by url

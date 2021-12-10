@@ -1,10 +1,14 @@
 describe('accountSettings', () => {
     it('accountSettings', () => {
+
+      const password = Cypress.env('password')
+
       cy.visit('https://wordpress.com/log-in?redirect_to=%2Fme%2Faccount');
+
       cy.get('#usernameOrEmail').type('rhefele@gmail.com');
       cy.get('.form-button').click();
       cy.get('form').submit();
-      cy.get('#password').type('Boomer01!');
+      cy.get('#password').type(password);
       cy.get('.form-button').click();
       cy.get('form').submit();
       cy.url().should('contains', 'https://wordpress.com/me/account');

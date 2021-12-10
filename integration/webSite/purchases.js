@@ -1,10 +1,14 @@
 describe('purchases', () => {
     it('purchases', () => {
+
+      const password = Cypress.env('password')
+
       cy.visit('https://wordpress.com/log-in?redirect_to=%2Fme%2Fpurchases');
       cy.get('#usernameOrEmail').type('rhefele@gmail.com');
       cy.get('.form-button').click();
       cy.get('form').submit();
-      cy.get('#password').type('Boomer01!');
+      cy.get('[name=password]')
+      cy.get('#password').type(password);
       cy.get('.form-button').click();
       cy.get('form').submit();
       cy.url().should('contains', 'https://wordpress.com/me/purchases');
