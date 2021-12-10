@@ -5,7 +5,13 @@ describe('accountSettings', () => {
 
       cy.visit('https://wordpress.com/log-in?redirect_to=%2Fme%2Faccount');
 
-      cy.get('#usernameOrEmail').type('rhefele@gmail.com');
+      //Getting login from file 
+      cy.fixture('login').then((profile)=>{
+
+        cy.get('#usernameOrEmail').type(profile.user);
+      })
+      
+      
       cy.get('.form-button').click();
       cy.get('form').submit();
       cy.get('#password').type(password);
