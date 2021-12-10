@@ -1,7 +1,7 @@
 describe('login', () => {
     it('login', () => {
       //Log into site
-      const username = Cypress.env('username')
+  
       const password = Cypress.env('password')
 
       cy.visit('https://wordpress.com/me')
