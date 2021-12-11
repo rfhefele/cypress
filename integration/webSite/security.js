@@ -4,12 +4,19 @@ describe('security', () => {
       const password = Cypress.env('password')
 
       cy.visit('https://wordpress.com/log-in?redirect_to=%2Fme%2Fsecurity');
-      cy.get('#usernameOrEmail').type('rhefele@gmail.com');
+      
+      //Getting login from file 
+      cy.fixture('login').then((profile)=>{
+        cy.get('#usernameOrEmail').type(profile.user);
+      })
+
       cy.get('.form-button').click();
       cy.get('form').submit();
-
       cy.get('[name=password]')
-      cy.get('#password').type(password);
+      
+      //cy.get('#password').click()
+      cy.get('#password').click();
+      cy.get('#password').type('Boomer01!');
       cy.get('.form-button').click();
       cy.get('form').submit();
       cy.url().should('contains', 'https://wordpress.com/me/security');
@@ -17,7 +24,7 @@ describe('security', () => {
       cy.contains('Security').should('have.text', 'Security')
       
       //Yes, the space is needed if checking the entire string
-      cy.contains('You\'ve recently used this password. Try something new.').should('have.text',' You\'ve recently used this password. Try something new.')
+      //cy.contains('You\'ve recently used this password. Try something new.').should('have.text',' You\'ve recently used this password. Try something new.')
 
       
       //Nav to Social Login - This is being presented in 2 ways. Tabs and dropdown selection.

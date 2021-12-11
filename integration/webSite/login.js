@@ -15,8 +15,6 @@ describe('login', () =>
       .type(profile.user)
     })
 
-    //cy.contains('Email Address or Username').click()
-      //.type(profile.user)
     cy.contains('Continue').click()
     cy.contains('Password').click()
       .type(password)  

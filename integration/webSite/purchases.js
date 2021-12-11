@@ -4,7 +4,12 @@ describe('purchases', () => {
       const password = Cypress.env('password')
 
       cy.visit('https://wordpress.com/log-in?redirect_to=%2Fme%2Fpurchases');
-      cy.get('#usernameOrEmail').type('rhefele@gmail.com');
+
+      //Getting login from file 
+      cy.fixture('login').then((profile)=>{
+        cy.get('#usernameOrEmail').type(profile.user);
+      })
+
       cy.get('.form-button').click();
       cy.get('form').submit();
       cy.get('[name=password]')

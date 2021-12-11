@@ -7,7 +7,6 @@ describe('accountSettings', () => {
 
       //Getting login from file 
       cy.fixture('login').then((profile)=>{
-
         cy.get('#usernameOrEmail').type(profile.user);
       })
       
